@@ -6,36 +6,32 @@ using System.Threading.Tasks;
 using DAL;
 using Entidades;
 
-namespace LogicaNegocio
+namespace LogicaNegocio.Services
 {
     public class TransactionService
     {
-        private readonly TransactionMng TransactionMng;
+        private readonly TransactionMng transactionMng;
 
         public TransactionService(string connectionString)
         {
-            transactionMng = new transactionMng(connectionString);
+            transactionMng = new TransactionMng(connectionString);
         }
 
-        public List<transaction> Gettransactions()
+        public List<Transaction> GetTransactions()
         {
-            return transactionMng.Gettransactions();
+            return transactionMng.GetTransactions();
         }
 
-        public void CreateTransaction(transaction transaction)
+        public void AddTransaction(Transaction transaction)
         {
-            // Aquí puedes realizar validaciones u operaciones adicionales antes de agregar el usuario.
-            transactionMng.CreateTransaction(transaction);
-        } 
+            // Aquí puedes realizar validaciones u operaciones adicionales antes de agregar la transacción.
+            transactionMng.AddTransaction(transaction);
+        }
 
-        public transaction GetTransaction(int id)
+        public List<Transaction> GetTransactionsByDate(DateTime date)
         {
-            return transactionMng.GetTransaction(id);
+            return transactionMng.GetTransactionsByDate(date);
         }
-        public List<transaction> GetTransactionsByDateRange(DateTime startDate, DateTime endDate)
-        {
-            // Aquí puedes realizar validaciones u operaciones adicionales si es necesario
-            return transactionMng.GetTransactionsByDateRange(DateTime startDate, DateTime endDate);
-        }
+
     }
 }
