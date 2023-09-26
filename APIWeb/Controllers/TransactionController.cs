@@ -1,148 +1,72 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Entidades;
-using LogicaNegocio;
+using LogicaNegocio.Services;
 
-namespace APIWeb.Controllers
+
+
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TransactionController : Controller
+    public class TransactionController : ControllerBase
     {
-        private readonly TransactionService TransactionService;
+        private readonly TransactionService transactionService;
+
+
 
         public TransactionController(TransactionService transactionService)
         {
             this.transactionService = transactionService;
         }
 
-        // POST: api/Transactions
+
+
         [HttpPost]
-        public IActionResult CreateTransaction([FromBody] Transaction transaction)
+        public IActionResult AddTransaction([FromBody] Transaction transaction)
         {
-            if (transaction == null)
+            try
             {
-                return BadRequest();
+                transactionService.AddTransaction(transaction);
+                return Ok("Transacción añadida correctamente");
             }
-
-            _transactionService.CreateTransaction(transaction);
-
-            return CreatedAtAction("GetTransaction", new { id = transaction.TransactionId }, transaction);
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al añadir transacción: {ex.Message}");
+            }
         }
 
-        // GET: api/Transactions
+
+
         [HttpGet]
-        public ActionResult<IEnumerable<Transaction>> GetTransactions()
+        public IActionResult GetTransactions()
         {
-            var transactions = _transactionService.GetTransactions();
-            return Ok(transactions);
-        }
-
-        // GET: api/Transactions/5
-        [HttpGet("{id}")]
-        public ActionResult<Transaction> GetTransaction(int id)
-        {
-            var transaction = _transactionService.GetTransactionById(id);
-
-            if (transaction == null)
+            try
             {
-                return NotFound();
+                var transactions = transactionService.GetTransactions();
+                return Ok(transactions);
             }
-
-            return Ok(transaction);
-        }
-
-        // GET: api/Transactions?startDate=2023-01-01&endDate=2023-12-31
-        [HttpGet("filter")]
-        public ActionResult<IEnumerable<Transaction>> GetTransactionsByDateRange(DateTime startDate, DateTime endDate)
-        {
-            var transactions = _transactionService.GetTransactionsByDateRange(startDate, endDate);
-
-            if (!transactions.Any())
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest($"Error al obtener la lista de transacciones: {ex.Message}");
             }
-
-            return Ok(transactions);
+        }
+        [HttpGet("GetTransactionsByDate")]
+        public IActionResult GetTransactionsByDate(DateTime date)
+        {
+            try
+            {
+                var transactions = transactionService.GetTransactionsByDate(date);
+                return Ok(transactions);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al obtener la lista de transacciones por fecha: {ex.Message}");
+            }
         }
 
-        //// GET: TransactionController
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
-        //// GET: TransactionController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
 
-        //// GET: TransactionController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: TransactionController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: TransactionController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: TransactionController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: TransactionController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: TransactionController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }
