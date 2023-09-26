@@ -1,46 +1,57 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Entidades;
 
-
+ 
 
 namespace DAL
 {
-    public class TransaccionMng
+    public class TransactionMng
     {
         private string connectionString; // Establece tu cadena de conexión a la base de datos aquí
 
-        public TransaccionMng(string connectionString)
+ 
+
+        public TransactionMng(string connectionString)
         {
             this.connectionString = connectionString;
         }
+
+ 
+
         public void AddTransaction(Transaction transaction)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO Transaction (UserId, Description, Monto, Date) VALUES (@UserId, @Description, @Monto, @Date)";
+                string query = "INSERT INTO [Transaction] (UserId, Description, Monto, Date) " +
+                               "VALUES (@UserId, @Description, @Monto, @Date)";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@UserId", transaction.UserId);
                 command.Parameters.AddWithValue("@Description", transaction.Description);
-                command.Parameters.AddWithValue("@Monto", transaction.Amount);
+                command.Parameters.AddWithValue("@Monto", transaction.Monto);
                 command.Parameters.AddWithValue("@Date", transaction.Date);
                 command.ExecuteNonQuery();
             }
         }
-        public List<Transaction> GetAllTransactions()
+
+ 
+
+        public List<Transaction> GetTransactions()
         {
             List<Transaction> transactions = new List<Transaction>();
+
+ 
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT * FROM Transaction";
+                string query = "SELECT TransactionId, UserId, Description, Monto, Date FROM [Transaction]";
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
+
+ 
 
                 while (reader.Read())
                 {
@@ -49,55 +60,54 @@ namespace DAL
                         TransactionId = (int)reader["TransactionId"],
                         UserId = (int)reader["UserId"],
                         Description = reader["Description"].ToString(),
-                        Amount = (decimal)reader["Monto"],
+                        Monto = (decimal)reader["Monto"],
                         Date = (DateTime)reader["Date"]
                     };
                     transactions.Add(transaction);
                 }
             }
+
+ 
+
             return transactions;
         }
 
-        public Transaction GetTransactionById(int transactionId)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                string query = "SELECT * FROM Transaction WHERE TransactionId = @TransactionId";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@TransactionId", transactionId);
-                SqlDataReader reader = command.ExecuteReader();
+ 
 
-                if (reader.Read())
-                {
-                    Transaction transaction = new Transaction
-                    {
-                        TransactionId = (int)reader["TransactionId"],
-                        UserId = (int)reader["UserId"],
-                        Description = reader["Description"].ToString(),
-                        Amount = (decimal)reader["Monto"],
-                        Date = (DateTime)reader["Date"]
-                    };
-                    return transaction;
-                }
-                else
-                {
-                    return null; // Si no se encuentra la transacción con el ID dado
-                }
-            }
-        }
-
-        public List<Transaction> GetTransactionsByDateRange(DateTime startDate, DateTime endDate)
+        public List<Transaction> GetTransactionsByDate(DateTime date)
         {
             List<Transaction> transactions = new List<Transaction>();
+
+ 
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT * FROM Transaction WHERE Date >= @StartDate AND Date <= @EndDate";
+                string query = "SELECT TransactionId, UserId, Description, Monto, Date " +
+                               "FROM [Transaction] " +
+                               "WHERE Date >= @StartDate AND Date < @EndDate";
                 SqlCommand command = new SqlCommand(query, connection);
+
+ 
+
+                // Calcular la fecha de inicio (00:00:00) del día proporcionado
+                DateTime startDate = date.Date;
+
+ 
+
+                // Calcular la fecha de finalización (00:00:00) del día siguiente al proporcionado
+                DateTime endDate = startDate.AddDays(1);
+
+ 
+
                 command.Parameters.AddWithValue("@StartDate", startDate);
                 command.Parameters.AddWithValue("@EndDate", endDate);
+
+ 
+
                 SqlDataReader reader = command.ExecuteReader();
+
+ 
 
                 while (reader.Read())
                 {
@@ -106,14 +116,21 @@ namespace DAL
                         TransactionId = (int)reader["TransactionId"],
                         UserId = (int)reader["UserId"],
                         Description = reader["Description"].ToString(),
-                        Amount = (decimal)reader["Monto"],
+                        Monto = (decimal)reader["Monto"],
                         Date = (DateTime)reader["Date"]
                     };
                     transactions.Add(transaction);
                 }
             }
+
+ 
+
             return transactions;
         }
+
+ 
+
+ 
 
     }
 }
