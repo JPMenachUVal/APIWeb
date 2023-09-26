@@ -44,6 +44,29 @@ namespace APIWeb.Controllers
                 return BadRequest($"Error al obtener la lista de personas: {ex.Message}");
             }
         }
+
+        [HttpDelete]
+        [Route("DeletePersonsByName")]
+        public IActionResult DeletePersonsByName(string name)
+        {
+            try
+            {
+                int affectedRows = personService.DeletePersonsByName(name);
+
+                if (affectedRows > 0)
+                {
+                    return Ok($"Se eliminaron {affectedRows} registros de Person con el nombre '{name}'.");
+                }
+                else
+                {
+                    return NotFound($"No se encontraron registros de Person con el nombre '{name}' para eliminar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al eliminar registros de Person por nombre: {ex.Message}");
+            }
+        }
         // GET: PersonController
         /*public ActionResult Index()
         {

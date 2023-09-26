@@ -54,5 +54,20 @@ namespace DAL
 
             return persons;
         }
+
+        public int DeletePersonsByName(string name)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "DELETE FROM Person WHERE Name = @Name";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", name);
+
+                int affectedRows = command.ExecuteNonQuery();
+
+                return affectedRows;
+            }
+        }
     }
 }

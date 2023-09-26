@@ -27,5 +27,10 @@ namespace LogicaNegocio
             // Aquí puedes realizar validaciones u operaciones adicionales antes de agregar el usuario.
             personMng.AddUser(person);
         }
+        public int DeletePersonsByName(string name)
+        {
+            // Aquí puedes realizar validaciones u operaciones adicionales si es necesario
+            return personMng.DeletePersonsByName(name);
+        }
     }
 }
