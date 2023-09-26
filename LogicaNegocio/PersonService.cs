@@ -17,6 +17,11 @@ namespace LogicaNegocio
             personMng = new PersonMng(connectionString);
         }
 
+        public List<Person> GetPersons()
+        {
+            return personMng.GetPersons();
+        }
+
         public void AddUser(Person person)
         {
             // Aquí puedes realizar validaciones u operaciones adicionales antes de agregar el usuario.

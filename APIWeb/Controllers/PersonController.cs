@@ -31,6 +31,19 @@ namespace APIWeb.Controllers
                 return BadRequest($"Error al añadir usuario: {ex.Message}");
             }
         }
+        [HttpGet]
+        public IActionResult GetPersons()
+        {
+            try
+            {
+                var persons = personService.GetPersons();
+                return Ok(persons);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al obtener la lista de personas: {ex.Message}");
+            }
+        }
         // GET: PersonController
         /*public ActionResult Index()
         {

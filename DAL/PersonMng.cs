@@ -29,5 +29,30 @@ namespace DAL
                 command.ExecuteNonQuery();
             }
         }
+        public List<Person> GetPersons()
+        {
+            List<Person> persons = new List<Person>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT Id, Name, Password FROM Person";
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Person person = new Person
+                    {
+                        Id = (int)reader["Id"],
+                        Name = reader["Name"].ToString(),
+                        Password = reader["Password"].ToString()
+                    };
+                    persons.Add(person);
+                }
+            }
+
+            return persons;
+        }
     }
 }
