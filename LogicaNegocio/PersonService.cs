@@ -32,5 +32,16 @@ namespace LogicaNegocio
             // Aquí puedes realizar validaciones u operaciones adicionales si es necesario
             return personMng.DeletePersonsByName(name);
         }
+
+        public void UpdateUser(Person person)
+        {
+            // Aquí puedes realizar validaciones u operaciones adicionales antes de actualizar el usuario.
+            personMng.UpdateUser(person);
+        }
+
+        public Person GetUserById(int id)
+        {
+            return personMng.GetUserById(id);
+        }
     }
 }

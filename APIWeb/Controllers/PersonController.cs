@@ -67,6 +67,20 @@ namespace APIWeb.Controllers
                 return BadRequest($"Error al eliminar registros de Person por nombre: {ex.Message}");
             }
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(int id, [FromBody] Person person)
+        {
+            try
+            {
+                personService.UpdateUser(person);
+                return Ok("Usuario actualizado correctamente");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al actualizar usuario: {ex.Message}");
+            }
+        }
         // GET: PersonController
         /*public ActionResult Index()
         {

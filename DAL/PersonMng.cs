@@ -69,5 +69,24 @@ namespace DAL
                 return affectedRows;
             }
         }
+
+        public Person GetUserById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateUser(Person person)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Person SET Name = @Name, Password = @Password WHERE Id = @Id";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", person.Name);
+                command.Parameters.AddWithValue("@Password", person.Password);
+                command.Parameters.AddWithValue("@Id", person.Id); // Asumiendo que person.Id contiene el ID del usuario a actualizar.
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
