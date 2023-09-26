@@ -48,5 +48,11 @@ namespace LogicaNegocio
         {
             return personMng.ChangePassword(id, newPassword);
         }
+
+        public List<Person> GetPersonsByName(string name)
+        {
+            // Aquí puedes realizar validaciones u operaciones adicionales si es necesario
+            return personMng.GetPersonsByName(name);
+        }
     }
 }

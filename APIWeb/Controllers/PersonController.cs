@@ -104,6 +104,29 @@ namespace APIWeb.Controllers
                 return BadRequest($"Error al cambiar la contraseña: {ex.Message}");
             }
         }
+
+        [HttpGet]
+        [Route("GetPersonsByName")]
+        public IActionResult GetPersonsByName(string name)
+        {
+            try
+            {
+                var persons = personService.GetPersonsByName(name);
+
+                if (persons != null && persons.Count > 0)
+                {
+                    return Ok(persons);
+                }
+                else
+                {
+                    return NotFound("No se encontraron personas con ese nombre.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al obtener personas por nombre: {ex.Message}");
+            }
+        }
         // GET: PersonController
         /*public ActionResult Index()
         {

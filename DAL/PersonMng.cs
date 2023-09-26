@@ -104,5 +104,36 @@ namespace DAL
                 return affectedRows;
             }
         }
+
+        public List<Person> GetPersonsByName(string name)
+        {
+            List<Person> persons = new List<Person>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Person WHERE Name = @Name";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", name);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Person person = new Person
+                        {
+                            // Ajusta los nombres de las columnas según tu esquema de base de datos
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Password = reader.GetString(reader.GetOrdinal("Password")),
+                            // Agrega otras propiedades según tu tabla
+                        };
+                        persons.Add(person);
+                    }
+                }
+            }
+
+            return persons;
+        }
     }
 }
