@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Entidades;
 
- 
-
 namespace DAL
 {
     public class TransactionMng
     {
         private string connectionString; // Establece tu cadena de conexión a la base de datos aquí
 
- 
-
         public TransactionMng(string connectionString)
         {
             this.connectionString = connectionString;
         }
-
- 
 
         public void AddTransaction(Transaction transaction)
         {
@@ -36,13 +30,9 @@ namespace DAL
             }
         }
 
- 
-
         public List<Transaction> GetTransactions()
         {
             List<Transaction> transactions = new List<Transaction>();
-
- 
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -50,8 +40,6 @@ namespace DAL
                 string query = "SELECT TransactionId, UserId, Description, Monto, Date FROM [Transaction]";
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-
- 
 
                 while (reader.Read())
                 {
@@ -67,18 +55,12 @@ namespace DAL
                 }
             }
 
- 
-
             return transactions;
         }
-
- 
 
         public List<Transaction> GetTransactionsByDate(DateTime date)
         {
             List<Transaction> transactions = new List<Transaction>();
-
- 
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -88,26 +70,16 @@ namespace DAL
                                "WHERE Date >= @StartDate AND Date < @EndDate";
                 SqlCommand command = new SqlCommand(query, connection);
 
- 
-
                 // Calcular la fecha de inicio (00:00:00) del día proporcionado
                 DateTime startDate = date.Date;
-
- 
 
                 // Calcular la fecha de finalización (00:00:00) del día siguiente al proporcionado
                 DateTime endDate = startDate.AddDays(1);
 
- 
-
                 command.Parameters.AddWithValue("@StartDate", startDate);
                 command.Parameters.AddWithValue("@EndDate", endDate);
 
- 
-
                 SqlDataReader reader = command.ExecuteReader();
-
- 
 
                 while (reader.Read())
                 {
@@ -123,14 +95,9 @@ namespace DAL
                 }
             }
 
- 
-
             return transactions;
         }
 
- 
-
- 
 
     }
 }

@@ -4,8 +4,6 @@ using System;
 using Entidades;
 using LogicaNegocio.Services;
 
-
-
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -14,14 +12,10 @@ namespace WebApi.Controllers
     {
         private readonly TransactionService transactionService;
 
-
-
         public TransactionController(TransactionService transactionService)
         {
             this.transactionService = transactionService;
         }
-
-
 
         [HttpPost]
         public IActionResult AddTransaction([FromBody] Transaction transaction)
@@ -36,8 +30,6 @@ namespace WebApi.Controllers
                 return BadRequest($"Error al añadir transacción: {ex.Message}");
             }
         }
-
-
 
         [HttpGet]
         public IActionResult GetTransactions()
@@ -65,8 +57,6 @@ namespace WebApi.Controllers
                 return BadRequest($"Error al obtener la lista de transacciones por fecha: {ex.Message}");
             }
         }
-
-
 
     }
 }
