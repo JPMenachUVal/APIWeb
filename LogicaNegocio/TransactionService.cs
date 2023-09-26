@@ -28,9 +28,9 @@ namespace LogicaNegocio
             transactionMng.CreateTransaction(transaction);
         } 
 
-        public transaction GetTransaction()
+        public transaction GetTransaction(int id)
         {
-            return transactionMng.GetTransaction();
+            return transactionMng.GetTransaction(id);
         }
         public List<transaction> GetTransactionsByDateRange(DateTime startDate, DateTime endDate)
         {
