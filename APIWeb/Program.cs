@@ -1,3 +1,4 @@
+using LogicaNegocio.Services;
 using LogicaNegocio;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Registrar la dependencia PersonService con la cadena de conexión.
 builder.Services.AddScoped(_ => new PersonService(connectionString));
+
+// Registrar la dependencia TransactionService con la cadena de conexión.
+builder.Services.AddScoped(_ => new TransactionService(connectionString));
 
 // Añadir Swagger para documentación API (si es necesario)
 builder.Services.AddEndpointsApiExplorer();
