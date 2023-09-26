@@ -88,5 +88,21 @@ namespace DAL
                 command.ExecuteNonQuery();
             }
         }
+
+        public int ChangePassword(int id, string newPassword)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Person SET Password = @NewPassword WHERE Id = @Id";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@NewPassword", newPassword);
+                command.Parameters.AddWithValue("@Id", id);
+
+                int affectedRows = command.ExecuteNonQuery();
+
+                return affectedRows;
+            }
+        }
     }
 }

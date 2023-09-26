@@ -81,6 +81,29 @@ namespace APIWeb.Controllers
                 return BadRequest($"Error al actualizar usuario: {ex.Message}");
             }
         }
+
+        [HttpPut]
+        [Route("ChangePassword")]
+        public IActionResult ChangePassword(int id, string newPassword)
+        {
+            try
+            {
+                int affectedRows = personService.ChangePassword(id, newPassword);
+
+                if (affectedRows > 0)
+                {
+                    return Ok("La contraseña se ha cambiado exitosamente.");
+                }
+                else
+                {
+                    return NotFound($"No se encontró el usuario con el Id '{id}' para cambiar la contraseña.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al cambiar la contraseña: {ex.Message}");
+            }
+        }
         // GET: PersonController
         /*public ActionResult Index()
         {

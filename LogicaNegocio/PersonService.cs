@@ -43,5 +43,10 @@ namespace LogicaNegocio
         {
             return personMng.GetUserById(id);
         }
+
+        public int ChangePassword(int id, string newPassword)
+        {
+            return personMng.ChangePassword(id, newPassword);
+        }
     }
 }
