@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIWeb", "APIWeb\APIWeb.csproj", "{1E8EC467-9E38-4518-91C5-4CFC86F1886D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIWeb", "APIWeb\APIWeb.csproj", "{1E8EC467-9E38-4518-91C5-4CFC86F1886D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{DEF0AAA9-95E1-4E48-9987-C1072F818024}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{DEF0AAA9-95E1-4E48-9987-C1072F818024}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{EFDCF8D5-A4AB-4726-8815-F8C72722D7B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{EFDCF8D5-A4AB-4726-8815-F8C72722D7B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaNegocio", "LogicaNegocio\LogicaNegocio.csproj", "{B7487738-60E9-4931-ADDA-E55E8E25E166}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaNegocio", "LogicaNegocio\LogicaNegocio.csproj", "{B7487738-60E9-4931-ADDA-E55E8E25E166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tool\Tools.csproj", "{F16B50CC-4374-408C-A3A5-6F87EB2E6991}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B7487738-60E9-4931-ADDA-E55E8E25E166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7487738-60E9-4931-ADDA-E55E8E25E166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7487738-60E9-4931-ADDA-E55E8E25E166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F16B50CC-4374-408C-A3A5-6F87EB2E6991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F16B50CC-4374-408C-A3A5-6F87EB2E6991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F16B50CC-4374-408C-A3A5-6F87EB2E6991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F16B50CC-4374-408C-A3A5-6F87EB2E6991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

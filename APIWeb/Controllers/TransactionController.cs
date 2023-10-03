@@ -27,7 +27,7 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error al añadir transacción: {ex.Message}");
+                return Funciones.GetErrorResponse(ex, StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -54,9 +54,25 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error al obtener la lista de transacciones por fecha: {ex.Message}");
+                return Funciones.GetErrorResponse(ex, StatusCodes.Status400BadRequest, "La fecha no es válida.");
+                //return BadRequest($"Error al obtener la lista de transacciones por fecha: {ex.Message}");
             }
         }
+
+        [HttpGet("GenerateError")]
+        public IActionResult GenerateError()
+        {
+            try
+            {
+                // Lanzar una excepción intencionada
+                throw new InvalidOperationException("Esto es una excepción intencionada.");
+            }
+            catch (Exception ex)
+            {
+                return Funciones.GetErrorResponse(ex);
+            }
+        }
+
 
     }
 }
