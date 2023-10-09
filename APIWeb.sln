@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Enti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaNegocio", "LogicaNegocio\LogicaNegocio.csproj", "{B7487738-60E9-4931-ADDA-E55E8E25E166}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tool\Tools.csproj", "{F16B50CC-4374-408C-A3A5-6F87EB2E6991}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "Tool\Tools.csproj", "{F16B50CC-4374-408C-A3A5-6F87EB2E6991}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppWeb", "AppWeb\AppWeb.csproj", "{C0D8C6CC-CDDC-4149-9FB3-213718172194}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F16B50CC-4374-408C-A3A5-6F87EB2E6991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F16B50CC-4374-408C-A3A5-6F87EB2E6991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F16B50CC-4374-408C-A3A5-6F87EB2E6991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0D8C6CC-CDDC-4149-9FB3-213718172194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D8C6CC-CDDC-4149-9FB3-213718172194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D8C6CC-CDDC-4149-9FB3-213718172194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D8C6CC-CDDC-4149-9FB3-213718172194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
